@@ -21,52 +21,51 @@
   <div class="crop bl" aria-hidden="true"></div>
   <div class="crop br" aria-hidden="true"></div>
   <div class="ruler" id="ruler" aria-hidden="true"></div>
-  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.2 // π = 3.14159265358979</div>
+  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.3 // π = 3.14159265358979</div>
 
   <main class="wrap">
     <h1 class="sr">Стартова сторінка</h1>
 
     <header class="page-header">
-      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>h</kbd> tools · <kbd>a</kbd> задачі · <kbd>n</kbd> нотатка · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
-      <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
+      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>h</kbd> tools · <kbd>a</kbd> задачі · <kbd>n</kbd> нотатка · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> відкрити запит у новій вкладці</p>
     </header>
 
     <section id="prompts" class="block" aria-labelledby="h-prompts">
       <h2 class="label" id="h-prompts">// запити</h2>
       <div class="rows">
         <form class="row" data-url="https://claude.ai/new?q=%s" data-key="c" data-role="ai">
-          <label for="q-claude" data-icon="claude"><span class="ic" aria-hidden="true"></span><span class="sr">claude</span></label>
-          <input id="q-claude" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у claude…">
+          <a class="service-home" href="https://claude.ai/" data-icon="claude" aria-label="Відкрити сайт Claude"><span class="ic" aria-hidden="true"></span></a>
+          <input id="q-claude" type="text" aria-label="Запит до Claude" autocomplete="off" spellcheck="false" placeholder="новий чат у claude…">
           <button type="submit" aria-label="Відкрити в claude"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://chatgpt.com/?q=%s" data-key="g" data-role="ai">
-          <label for="q-gpt" data-icon="openai"><span class="ic" aria-hidden="true"></span><span class="sr">chatgpt</span></label>
-          <input id="q-gpt" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у chatgpt…">
+          <a class="service-home" href="https://chatgpt.com/" data-icon="openai" aria-label="Відкрити сайт ChatGPT"><span class="ic" aria-hidden="true"></span></a>
+          <input id="q-gpt" type="text" aria-label="Запит до ChatGPT" autocomplete="off" spellcheck="false" placeholder="новий чат у chatgpt…">
           <button type="submit" aria-label="Відкрити в chatgpt"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://duck.ai/?q=%s" data-key="d" data-role="ai">
-          <label for="q-duckai" data-icon="ddgai"><span class="ic" aria-hidden="true"></span><span class="sr">duck.ai</span></label>
-          <input id="q-duckai" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у duck.ai…">
+          <a class="service-home" href="https://duck.ai/" data-icon="ddgai" aria-label="Відкрити сайт Duck.ai"><span class="ic" aria-hidden="true"></span></a>
+          <input id="q-duckai" type="text" aria-label="Запит до Duck.ai" autocomplete="off" spellcheck="false" placeholder="новий чат у duck.ai…">
           <button type="submit" aria-label="Відкрити в duck.ai"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://duckduckgo.com/?q=%s" data-key="s" data-role="search" data-smart="url">
-          <label for="q-ddg" data-icon="duckduckgo"><span class="ic" aria-hidden="true"></span><span class="sr">duckduckgo</span></label>
-          <input id="q-ddg" type="text" autocomplete="off" spellcheck="false" placeholder="пошук або адреса…">
+          <a class="service-home" href="https://duckduckgo.com/" data-icon="duckduckgo" aria-label="Відкрити DuckDuckGo"><span class="ic" aria-hidden="true"></span></a>
+          <input id="q-ddg" type="text" aria-label="Пошук або адреса для DuckDuckGo" autocomplete="off" spellcheck="false" placeholder="пошук або адреса…">
           <button type="submit" aria-label="Шукати в duckduckgo"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://translate.google.com/?sl=auto&amp;tl=uk&amp;op=translate&amp;text=%s" data-key="t" data-role="tool">
-          <label for="q-tr" data-icon="translate"><span class="ic" aria-hidden="true"></span><span class="sr">переклад → uk</span></label>
-          <input id="q-tr" type="text" autocomplete="off" spellcheck="false" placeholder="текст для перекладу…">
+          <a class="service-home" href="https://translate.google.com/" data-icon="translate" aria-label="Відкрити Google Translate"><span class="ic" aria-hidden="true"></span></a>
+          <input id="q-tr" type="text" aria-label="Текст для перекладу українською" autocomplete="off" spellcheck="false" placeholder="текст для перекладу…">
           <button type="submit" aria-label="Перекласти"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://github.com/search?q=%s&amp;type=repositories" data-role="search">
-          <label for="q-github" data-icon="github"><span class="ic" aria-hidden="true"></span><span class="sr">github</span></label>
-          <input id="q-github" type="text" autocomplete="off" spellcheck="false" placeholder="пошук репозиторіїв github…">
+          <a class="service-home" href="https://github.com/" data-icon="github" aria-label="Відкрити GitHub"><span class="ic" aria-hidden="true"></span></a>
+          <input id="q-github" type="text" aria-label="Пошук репозиторіїв на GitHub" autocomplete="off" spellcheck="false" placeholder="пошук репозиторіїв github…">
           <button type="submit" aria-label="Шукати репозиторії на github"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://tools.mandrock.me/%s" data-key="h" data-role="tool" data-path="true">
-          <label for="q-tools" data-icon="tools"><span class="ic" aria-hidden="true"></span><span class="sr">tools.mandrock.me</span></label>
-          <input id="q-tools" name="tools-path" type="text" list="tools-paths" autocomplete="on" spellcheck="false" placeholder="tools.mandrock.me / шлях…">
+          <a class="service-home" href="https://tools.mandrock.me/" data-icon="tools" aria-label="Відкрити tools.mandrock.me"><span class="ic" aria-hidden="true"></span></a>
+          <input id="q-tools" name="tools-path" type="text" aria-label="Шлях на tools.mandrock.me" list="tools-paths" autocomplete="on" spellcheck="false" placeholder="tools.mandrock.me / шлях…">
           <datalist id="tools-paths"><option value="password"></option><option value="earforge"></option><option value="sonargale"></option><option value="sampler"></option><option value="hand-chord"></option><option value="touchviz"></option><option value="hydra-track"></option><option value="av"></option><option value="ssch-album"></option><option value="hydra-blocks"></option><option value="basshighway"></option><option value="visuals"></option><option value="palettes"></option><option value="ytdlp"></option><option value="mdfocus"></option><option value="json"></option><option value="1337"></option><option value="vault/stl"></option><option value="voxed"></option><option value="vr"></option><option value="gpsmap"></option><option value="roomspark"></option><option value="orchat"></option><option value="anarchy-reader"></option><option value="crystl"></option><option value="read"></option><option value="thumb"></option><option value="mediatorrent"></option><option value="dmouse"></option><option value="recorder"></option><option value="esp32"></option><option value="gpio"></option><option value="runs"></option><option value="code"></option><option value="day"></option><option value="projects-review"></option><option value="kiri-files"></option><option value="kiri-openscad"></option></datalist>
           <button type="submit" aria-label="Відкрити інструмент"><span aria-hidden="true">↵</span></button>
         </form>
@@ -88,6 +87,7 @@
         <a class="quick-link" href="https://tools.mandrock.me/runs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM7 10l3 2-3 2M12 15h5"/></svg><span>runs</span></a>
         <a class="quick-link" href="https://tools.mandrock.me/password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5zM12 14v3"/></svg><span>password</span></a>
       </nav>
+      <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
     </aside>
 
     <section class="block" aria-labelledby="h-links">

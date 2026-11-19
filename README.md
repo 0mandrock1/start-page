@@ -31,7 +31,7 @@
 | **github** | пошук репозиторіїв на GitHub |
 | **tools** | перехід до шляху на tools.mandrock.me; підказки `runs` і `password` |
 
-`Ctrl`+`Enter` (або `Shift`+`Enter`) відкриває результат у новій вкладці.
+`Ctrl`+`Enter` (або `Shift`+`Enter`) відкриває запит у новій вкладці.
 
 ### Швидкий доступ
 
