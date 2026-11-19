@@ -29,13 +29,13 @@ body {
 
 .wrap {
   position: relative;
-  max-width: 62rem;
+  max-width: 70rem;
   margin: 0 auto;
-  padding: clamp(2.5rem, 7vh, 5rem) 1.5rem 3rem;
+  padding: clamp(1.5rem, 4vh, 2.5rem) 1.5rem 3rem;
 }
 
 /* ---------- hero: прапор-флаєр ---------- */
-.hero { margin-bottom: 2.5rem; }
+.hero { margin-bottom: 1.5rem; }
 .eyebrow {
   margin: 0 0 0.25rem;
   color: var(--muted-foreground);
@@ -48,7 +48,7 @@ body {
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.05em;
-  font-size: clamp(2.5rem, 8.5vw, 5.75rem);
+  font-size: clamp(2.5rem, 4vw, 3.25rem);
   font-variant-numeric: tabular-nums;
 }
 .hm { position: relative; display: inline-block; text-shadow: 0 0 24px color-mix(in oklch, var(--page-accent) 45%, transparent); }
@@ -81,7 +81,7 @@ body {
 }
 
 /* ---------- блоки ---------- */
-.block { margin-bottom: 2.25rem; }
+.block { margin-bottom: 1.5rem; }
 .head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
 .label {
   margin: 0 0 0.75rem;
@@ -130,7 +130,7 @@ label[data-icon="ddgai"]::after { content: "AI"; position: absolute; right: 0.5r
   white-space: nowrap;
 }
 .row input {
-  min-width: 0; padding: 0.875rem 1rem;
+  min-width: 0; min-height: 40px; padding: 0.625rem 1rem;
   background: transparent; color: var(--foreground);
   border: 0; border-radius: 0;
   font: inherit; font-size: 1rem;
@@ -253,7 +253,18 @@ kbd { font: inherit; padding: 0 0.3em; border-radius: var(--radius-card); box-sh
 }
 
 /* ---------- адаптив ---------- */
+@media (min-width: 900px) {
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 14rem; column-gap: 2rem; align-items: start; }
+  .wrap > * { grid-column: 1 / -1; }
+  #prompts { grid-column: 1; grid-row: 1; }
+  .hero { grid-column: 2; grid-row: 1; }
+}
+
 @media (max-width: 780px) {
+  .wrap { display: flex; flex-direction: column; }
+  .wrap > * { width: 100%; }
+  .wrap > .sr { width: 1px; }
+  .hero { order: -1; }
   .row { grid-template-columns: 3.25rem 1fr 2.75rem; transform: none; }
   .tiles { grid-template-columns: repeat(2, 1fr); }
   .cols { grid-template-columns: 1fr; }
