@@ -5,7 +5,7 @@ root = pathlib.Path(__file__).resolve().parent.parent
 version = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))['version']
 files = ['manifest.json', 'newtab.html', 'LICENSE']
 for d in ('css', 'js', 'icons'):
-    files += sorted(p.relative_to(root).as_posix() for p in (root / d).iterdir() if p.is_file())
+    files += sorted(p.relative_to(root).as_posix() for p in (root / d).rglob('*') if p.is_file())
 dist = root / 'dist'
 dist.mkdir(exist_ok=True)
 out = dist / f'mandrock0-start-{version}.zip'
