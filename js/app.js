@@ -275,10 +275,10 @@
       if (e.key === 'Escape') t.blur();
       return;
     }
-    const key = e.key.toLowerCase();
+    const key = /^Key[A-Z]$/.test(e.code) ? e.code.slice(3).toLowerCase() : e.key.toLowerCase();
     if (key === 'a') { e.preventDefault(); (tasksEl.querySelector('.task .t') || $('task-in')).focus(); return; }
     if (key === 'n') { e.preventDefault(); note.focus(); return; }
-    const form = document.querySelector('form.row[data-key="' + key + '"]');
+    const form = /^[a-z]$/.test(key) ? document.querySelector('form.row[data-key="' + key + '"]') : null;
     if (form) { e.preventDefault(); form.querySelector('input').focus(); return; }
     if (/^[1-9]$/.test(key)) {
       const a = tiles.querySelectorAll('a')[+key - 1];
