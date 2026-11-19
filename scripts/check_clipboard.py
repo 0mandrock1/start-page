@@ -96,7 +96,7 @@ try:
             edge, "--headless", "--disable-gpu", "--no-first-run",
             "--disable-background-networking", "--host-resolver-rules=MAP * ~NOTFOUND",
             "--user-data-dir=" + profile, "--window-size=1366,768",
-            "--virtual-time-budget=2300", "--dump-dom", probe_path.as_uri()
+            "--virtual-time-budget=2300", "--dump-dom", probe_path.as_uri() + "?focus=page"
         ], capture_output=True, text=True, encoding="utf-8",
             errors="replace", timeout=45)
     match = re.search(r'<pre id="radar-test-result">(.*?)</pre>', result.stdout)

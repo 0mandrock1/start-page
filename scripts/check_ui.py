@@ -24,7 +24,7 @@ setTimeout(() => {
   document.body.dispatchEvent(new KeyboardEvent('keydown', {
     key: 'й', code: 'KeyQ', bubbles: true
   }));
-  const qFocus = document.activeElement.id === 'q-tools';
+  const qInactive = document.activeElement.id !== 'q-tools' && !document.getElementById('q-tools');
   document.activeElement.blur();
   document.body.dispatchEvent(new KeyboardEvent('keydown', {
     key: 'р', code: 'KeyH', bubbles: true
@@ -35,15 +35,19 @@ setTimeout(() => {
   const nav = document.querySelector('nav.quick-links');
   const radar = document.getElementById('clipboardRadarWrap');
   const radarButton = document.getElementById('clipboardRadar');
-  const article = nav.querySelector('a[href="https://articles.mandrock.me/"]');
+  const password = nav.querySelector('a[href="https://tools.mandrock.me/password"]');
   const radarRect = radarButton.getBoundingClientRect();
-  const articleRect = article.getBoundingClientRect();
-  const radarReplacedTools = radar.parentElement === nav
-    && !nav.querySelector('a[href="https://tools.mandrock.me/"]')
-    && Math.abs(radarRect.top - articleRect.top) < 1
-    && Math.abs(radarRect.height - articleRect.height) < 1
-    && radarRect.left < articleRect.left
-    && Math.abs(radarRect.width - articleRect.width) < 1;
+  const passwordRect = password.getBoundingClientRect();
+  const minimalQuickLinks = nav.children.length === 2
+    && nav.firstElementChild === radar && nav.lastElementChild === password
+    && !nav.querySelector('a[href="https://read.mandrock.me/"]')
+    && !nav.querySelector('a[href="https://articles.mandrock.me/"]')
+    && !nav.querySelector('a[href="https://tools.mandrock.me/runs"]')
+    && !document.getElementById('q-tools')
+    && Math.abs(radarRect.top - passwordRect.top) < 1
+    && Math.abs(radarRect.height - passwordRect.height) < 1
+    && radarRect.left < passwordRect.left
+    && Math.abs(radarRect.width - passwordRect.width) < 1;
   const radarLabelFits = radarButton.scrollWidth <= radarButton.clientWidth;
   const clock = document.getElementById('hm');
   const variants = ['shear', 'prism', 'scan', 'phase', 'static'];
@@ -75,7 +79,7 @@ setTimeout(() => {
   document.getElementById('accentName').textContent = 'crimson';
   accent.click();
   const result = {
-    qFocus, hInactive, fullWidth, radarReplacedTools, radarLabelFits, selected,
+    qInactive, hInactive, fullWidth, minimalQuickLinks, radarLabelFits, selected,
     fiveGlitches: variants.includes(selected)
       && new Set(animationNames).size === 5
       && animationNames.every(name => name !== 'none'),
@@ -106,14 +110,14 @@ try:
                 "--host-resolver-rules=MAP * ~NOTFOUND",
                 "--user-data-dir=" + profile,
                 f"--window-size={width},{height}", "--virtual-time-budget=1900",
-                "--dump-dom", test_html.as_uri(),
+                "--dump-dom", test_html.as_uri() + "?focus=page",
             ], capture_output=True, text=True, encoding="utf-8",
                 errors="replace", timeout=45)
         match = re.search(r'<pre id="test-result">(.*?)</pre>', run.stdout)
         if not match:
             raise RuntimeError(f"Edge exit={run.returncode}; no test result at {width}x{height}")
         data = json.loads(match.group(1))
-        required = ["qFocus", "hInactive", "fullWidth", "radarReplacedTools",
+        required = ["qInactive", "hInactive", "fullWidth", "minimalQuickLinks",
                     "radarLabelFits", "accentChanged",
                     "labelChanged", "quickLinkChanged", "clickGlitch",
                     "fiveGlitches", "dateTwoLines", "dateFits", "coloredClock",
