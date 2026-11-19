@@ -20,16 +20,10 @@
   <div class="crop bl" aria-hidden="true"></div>
   <div class="crop br" aria-hidden="true"></div>
   <div class="ruler" id="ruler" aria-hidden="true"></div>
-  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.1.0 // π = 3.14159265358979</div>
+  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.0 // π = 3.14159265358979</div>
 
   <main class="wrap">
     <h1 class="sr">Стартова сторінка</h1>
-
-    <header class="hero">
-      <p class="eyebrow" id="greet">// …</p>
-      <p class="clock"><span class="hm" id="hm" data-t="00:00">00:00</span><span class="sec" id="sec" aria-hidden="true">:00</span></p>
-      <p class="date" id="date"></p>
-    </header>
 
     <section id="prompts" class="block" aria-labelledby="h-prompts">
       <h2 class="label" id="h-prompts">// запити</h2>
@@ -59,8 +53,25 @@
           <input id="q-tr" type="text" autocomplete="off" spellcheck="false" placeholder="текст для перекладу…">
           <button type="submit" aria-label="Перекласти"><span aria-hidden="true">↵</span></button>
         </form>
+        <form class="row" data-url="https://github.com/search?q=%s&amp;type=repositories" data-key="h" data-role="search">
+          <label for="q-github" data-icon="github"><span class="ic" aria-hidden="true"></span><span class="sr">github</span></label>
+          <input id="q-github" type="text" autocomplete="off" spellcheck="false" placeholder="пошук репозиторіїв github…">
+          <button type="submit" aria-label="Шукати репозиторії на github"><span aria-hidden="true">↵</span></button>
+        </form>
       </div>
           </section>
+
+    <aside class="hero" aria-label="Час і дата">
+      <p class="eyebrow" id="greet">// …</p>
+      <p class="clock"><span class="hm" id="hm" data-t="00:00">00:00</span><span class="sec" id="sec" aria-hidden="true">:00</span></p>
+      <p class="date" id="date"></p>
+      <nav class="quick-links" aria-label="Швидкий доступ">
+        <a class="quick-link" href="https://tools.mandrock.me/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5a5 5 0 0 0-6 6L4 15l5 5 4-4a5 5 0 0 0 6-6l-3 3-3-3z"/></svg><span>tools</span></a>
+        <a class="quick-link" href="https://articles.mandrock.me/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 11h8M8 14h8M8 17h5"/></svg><span>articles</span></a>
+        <a class="quick-link" href="https://tools.mandrock.me/runs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM7 10l3 2-3 2M12 15h5"/></svg><span>runs</span></a>
+        <a class="quick-link" href="https://tools.mandrock.me/password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5zM12 14v3"/></svg><span>password</span></a>
+      </nav>
+    </aside>
 
     <section class="block" aria-labelledby="h-links">
       <div class="head">
@@ -68,6 +79,7 @@
         <button type="button" class="ghost" id="editLinks" aria-pressed="false">змінити</button>
       </div>
       <ul class="tiles" id="tiles"></ul>
+      <p class="sr" id="linksStatus" aria-live="polite"></p>
       <form class="addlink" id="addLink" hidden>
         <input id="nl-name" type="text" autocomplete="off" placeholder="назва" aria-label="Назва лінка" required>
         <input id="nl-url" type="text" autocomplete="off" placeholder="https://…" aria-label="Адреса лінка" required>
@@ -84,17 +96,21 @@
         </form>
         <ul class="tasks" id="tasks"></ul>
         <p class="empty" id="tasksEmpty" hidden>пусто. добре.</p>
+        <div class="task-summary">
+          <span id="tasksCount" aria-live="polite"></span>
+          <button type="button" class="ghost" id="clearDone" hidden>прибрати виконані</button>
+        </div>
       </section>
 
       <section class="block" aria-labelledby="h-note">
         <h2 class="label" id="h-note">// нотатка</h2>
         <textarea id="note" spellcheck="false" aria-label="Швидка нотатка" placeholder="сюди можна кинути що завгодно — збережеться саме"></textarea>
-        <p class="saved" id="saved" aria-live="polite"></p>
+        <p class="saved"><span id="saved" aria-live="polite"></span> <span id="noteCount"></span></p>
       </section>
     </div>
 
     <footer class="foot">
-      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
+      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>h</kbd> github · <kbd>a</kbd> задачі · <kbd>n</kbd> нотатка · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
       <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
     </footer>
   </main>
