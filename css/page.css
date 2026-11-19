@@ -288,6 +288,8 @@ kbd { font: inherit; padding: 0 0.3em; border-radius: var(--radius-card); box-sh
 
 /* ---------- адаптив ---------- */
 @media (min-width: 900px) {
+  /* Desktop: прибираємо зайві вертикальні проміжки між секціями. */
+  .page-header, .hero, .block { margin-bottom: 0; }
   .wrap { display: grid; grid-template-columns: 14rem minmax(0, 1fr); column-gap: 2rem; align-items: start; }
   .wrap > * { grid-column: 1 / -1; }
   .page-header { grid-column: 1 / -1; grid-row: 1; }
