@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "mandrock0 start",
   "short_name": "start",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Мінімалістична стартова сторінка в стилі mandrock0: швидкі лінки, запити в AI-чати та пошук, задачі й нотатка.",
   "chrome_url_overrides": { "newtab": "newtab.html" },
   "permissions": ["storage", "topSites", "favicon"],

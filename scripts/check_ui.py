@@ -45,13 +45,28 @@ setTimeout(() => {
   const dateTwoLines = dateFull.getBoundingClientRect().top > weekday.getBoundingClientRect().top;
   const dateFits = [weekday, dateFull].every(el => el.scrollWidth <= el.clientWidth);
   const coloredClock = getComputedStyle(clock).color !== getComputedStyle(hero).color;
+  const hourWarp = document.getElementById('hourWarp');
+  const progress = parseFloat(document.getElementById('hourWarpFill').style.width);
+  const timeWarpWorks = progress >= 0 && progress < 100
+    && Number(hourWarp.getAttribute('aria-valuenow')) === new Date().getMinutes();
+  const originalGlitch = clock.dataset.clockGlitch;
+  document.getElementById('clockTrigger').dispatchEvent(new MouseEvent('click', {detail: 1, bubbles: true}));
+  const cycleWorks = clock.dataset.clockGlitch !== originalGlitch;
+  const previousAccent = document.documentElement.dataset.accent;
+  const previousGlitch = clock.dataset.clockGlitch;
+  document.getElementById('clockTrigger').dispatchEvent(new MouseEvent('dblclick', {detail: 2, bubbles: true}));
+  const jackpotWorks = clock.dataset.clockGlitch !== previousGlitch
+    && document.documentElement.dataset.accent !== previousAccent;
+  // Restore the previous accent so the baseline accent button check remains deterministic.
+  document.documentElement.dataset.accent = 'crimson';
+  document.getElementById('accentName').textContent = 'crimson';
   accent.click();
   const result = {
     qFocus, hInactive, fullWidth, selected,
     fiveGlitches: variants.includes(selected)
       && new Set(animationNames).size === 5
       && animationNames.every(name => name !== 'none'),
-    dateTwoLines, dateFits, coloredClock,
+    dateTwoLines, dateFits, coloredClock, timeWarpWorks, cycleWorks, jackpotWorks,
     accentChanged: document.documentElement.dataset.accent === 'purple',
     labelChanged: getComputedStyle(label).borderLeftColor !== initial.label,
     quickLinkChanged: getComputedStyle(quickLink).borderBottomColor !== initial.quickLink,
@@ -87,7 +102,8 @@ try:
         data = json.loads(match.group(1))
         required = ["qFocus", "hInactive", "fullWidth", "accentChanged",
                     "labelChanged", "quickLinkChanged", "clickGlitch",
-                    "fiveGlitches", "dateTwoLines", "dateFits", "coloredClock"]
+                    "fiveGlitches", "dateTwoLines", "dateFits", "coloredClock",
+                    "timeWarpWorks", "cycleWorks", "jackpotWorks"]
         if height == 1080:
             required.append("fits1080")
         print(f"{width}x{height}: {data}", flush=True)

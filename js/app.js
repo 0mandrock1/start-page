@@ -62,10 +62,15 @@
       el.dataset.t = hm; // копії не відстають після зміни хвилини
     }
     $('sec').textContent = ':' + pad(d.getSeconds());
+    $('clockTrigger').setAttribute('aria-label',
+      'Зараз ' + hm + '. Клік змінює глітч. Подвійний клік змінює колір та глітч.');
     $('greet').textContent = greeting(d.getHours());
     $('dateWeekday').textContent = d.toLocaleDateString('uk-UA', { weekday: 'long' });
     $('dateFull').textContent = d.toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
     $('date').setAttribute('aria-label', d.toLocaleDateString('uk-UA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
+    const progress = (d.getMinutes() + d.getSeconds() / 60) / 60 * 100;
+    $('hourWarpFill').style.width = progress.toFixed(3) + '%';
+    $('hourWarp').setAttribute('aria-valuenow', String(d.getMinutes()));
   }
   tick();
   setInterval(tick, 1000);
@@ -348,6 +353,38 @@
   });
   accentButton.addEventListener('animationend', (e) => {
     if (e.animationName === 'accent-shear') accentButton.classList.remove('accent-switch');
+  });
+
+  // ---------- glitch jackpot ----------
+  function replayClockGlitch(name) {
+    const clock = $('hm');
+    clock.removeAttribute('data-clock-glitch');
+    void clock.offsetWidth;
+    clock.dataset.clockGlitch = name;
+    console.debug('[start-page] clock glitch replay', { glitch: name });
+  }
+  function randomOther(items, current) {
+    const choices = items.filter(item => item !== current);
+    try {
+      const bits = new Uint32Array(1);
+      crypto.getRandomValues(bits);
+      return choices[bits[0] % choices.length];
+    } catch {
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+  }
+  $('clockTrigger').addEventListener('click', (e) => {
+    if (e.detail >= 2) return; // dblclick вибирає всю комбінацію окремо
+    const current = $('hm').dataset.clockGlitch;
+    replayClockGlitch(CLOCK_GLITCHES[(CLOCK_GLITCHES.indexOf(current) + 1) % CLOCK_GLITCHES.length]);
+  });
+  $('clockTrigger').addEventListener('dblclick', () => {
+    const accent = randomOther(ACCENTS, document.documentElement.dataset.accent);
+    const glitch = randomOther(CLOCK_GLITCHES, $('hm').dataset.clockGlitch);
+    setAccent(accent);
+    store.set('accent', accent);
+    replayClockGlitch(glitch);
+    console.debug('[start-page] clock jackpot', { accent, glitch });
   });
 
   // ---------- гарячі клавіші ----------

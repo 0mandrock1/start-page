@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/accents.css">
   <link rel="stylesheet" href="css/page.css">
   <link rel="stylesheet" href="css/clock-glitches.css">
+  <link rel="stylesheet" href="css/microtools.css">
 </head>
 <body>
   <a class="skip" href="#prompts">до полів вводу</a>
@@ -22,7 +23,7 @@
   <div class="crop bl" aria-hidden="true"></div>
   <div class="crop br" aria-hidden="true"></div>
   <div class="ruler" id="ruler" aria-hidden="true"></div>
-  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.6 // π = 3.14159265358979</div>
+  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.7 // π = 3.14159265358979</div>
 
   <main class="wrap">
     <h1 class="sr">Стартова сторінка</h1>
@@ -75,7 +76,8 @@
 
     <aside class="hero" aria-label="Час і дата">
       <p class="eyebrow" id="greet">// …</p>
-      <p class="clock"><span class="hm" id="hm" data-t="00:00">00:00</span><span class="sec" id="sec" aria-hidden="true">:00</span></p>
+      <p class="clock"><button type="button" class="clock-trigger" id="clockTrigger" aria-label="Змінити глітч годинника. Подвійне натискання змінює колір та ефект" title="Клік: інший глітч · подвійний клік: випадковий колір і глітч"><span class="hm" id="hm" data-t="00:00">00:00</span><span class="sec" id="sec" aria-hidden="true">:00</span></button></p>
+      <div class="hour-warp" id="hourWarp" role="progressbar" aria-label="Перебіг поточної години" aria-valuemin="0" aria-valuemax="60" aria-valuenow="0"><span class="hour-warp-fill" id="hourWarpFill" aria-hidden="true"></span></div>
       <p class="date" id="date"><span id="dateWeekday"></span><span id="dateFull"></span></p>
       <nav class="quick-links" aria-label="Швидкий доступ">
         <div class="read-split">
@@ -89,6 +91,25 @@
         <a class="quick-link" href="https://tools.mandrock.me/password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5zM12 14v3"/></svg><span>password</span></a>
       </nav>
       <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
+      <div class="clip-radar" id="clipboardRadarWrap">
+        <button type="button" class="ghost clip-radar-trigger" id="clipboardRadar" aria-expanded="false" aria-controls="clipboardRadarPanel">◈ буфер / radar</button>
+        <section class="clip-radar-panel" id="clipboardRadarPanel" aria-label="Clipboard Radar" hidden>
+          <div class="clip-radar-head"><strong>// clipboard radar</strong><button type="button" class="clip-radar-close" id="clipboardRadarClose" aria-label="Закрити">×</button></div>
+          <p class="clip-radar-status" id="clipboardRadarStatus" role="status" aria-live="polite">Дані читаються лише після натискання.</p>
+          <div id="clipboardRadarPaste" hidden>
+            <label for="clipboardRadarInput">Доступ до буфера відхилено. Встав вручну через Ctrl+V:</label>
+            <textarea id="clipboardRadarInput" rows="2" spellcheck="false" placeholder="Ctrl+V · проаналізувати локально"></textarea>
+          </div>
+          <div id="clipboardRadarResult" hidden>
+            <div class="clip-radar-type" id="clipboardRadarType"></div>
+            <pre class="clip-radar-preview" id="clipboardRadarPreview"></pre>
+            <div class="clip-radar-actions">
+              <button type="button" class="ghost clip-radar-copy" id="clipboardRadarCopy" aria-label="Копіювати">копіювати</button>
+              <button type="button" class="ghost" id="clipboardRadarAction" hidden></button>
+            </div>
+          </div>
+        </section>
+      </div>
     </aside>
 
     <section class="block" aria-labelledby="h-links">
@@ -131,5 +152,6 @@
 
   <script src="js/mandrock0-ambient.js" data-profile="calm" data-layers="grid,foci,debris"></script>
   <script src="js/app.js"></script>
+  <script src="js/clipboard-radar.js"></script>
 </body>
 </html>
