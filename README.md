@@ -29,12 +29,14 @@
 | **duckduckgo** | пошук; якщо ввести адресу (`example.com/page`) — відкриє її напряму; `!bangs` працюють |
 | **переклад → uk** | Google Translate з уже вставленим текстом (auto → українська) |
 | **github** | пошук репозиторіїв на GitHub |
+| **tools** | перехід до шляху на tools.mandrock.me; підказки `runs` і `password` |
 
 `Ctrl`+`Enter` (або `Shift`+`Enter`) відкриває результат у новій вкладці.
 
 ### Швидкий доступ
 
 Поруч із запитами на широкому екрані розташований компактний годинник. Під годинником є кнопки **tools**, **articles**, **runs** і **password**.
+Поруч із запитами на широкому екрані розташований компактний годинник. Під годинником є розділена кнопка **read / drafts**, **kb-flow**, **tools**, **articles**, **runs** і **password**.
 
 ### `// лінки`
 Google Translate, xHamster, Gmail, Proton Mail, tools.mandrock.me, articles.mandrock.me. Біля кожного — favicon сайту, а якщо його нема, то літера.
@@ -47,7 +49,7 @@ Google Translate, xHamster, Gmail, Proton Mail, tools.mandrock.me, articles.mand
 
 | Клавіша | Дія |
 |---|---|
-| `c` `g` `d` `s` `t` `h` | фокус у полі claude / chatgpt / duck.ai / пошук / переклад / GitHub |
+| `c` `g` `d` `s` `t` `h` | фокус у полі claude / chatgpt / duck.ai / пошук / переклад / tools |
 | `a` | фокус на першій задачі або полі нової задачі |
 | `n` | фокус у нотатці |
 | `1`–`9` | відкрити відповідний лінк |

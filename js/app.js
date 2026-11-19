@@ -64,6 +64,7 @@
   document.querySelectorAll('form.row').forEach((form, i) => {
     form.style.setProperty('--n', piDigit(i));
     const input = form.querySelector('input');
+    const encodeQuery = (q) => form.dataset.path ? encodeURIComponent(q).replace(/%2F/gi, '/') : encodeURIComponent(q);
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const q = input.value.trim();
@@ -72,7 +73,7 @@
       if (form.dataset.smart === 'url' && URL_LIKE.test(q)) {
         url = /^https?:\/\//i.test(q) ? q : 'https://' + q;
       } else {
-        url = form.dataset.url.replace('%s', encodeURIComponent(q));
+        url = form.dataset.url.replace('%s', encodeQuery(q));
       }
       location.assign(url);
     });
@@ -83,7 +84,7 @@
         if (!q) return;
         const url = form.dataset.smart === 'url' && URL_LIKE.test(q)
           ? (/^https?:\/\//i.test(q) ? q : 'https://' + q)
-          : form.dataset.url.replace('%s', encodeURIComponent(q));
+          : form.dataset.url.replace('%s', encodeQuery(q));
         window.open(url, '_blank', 'noopener');
       }
     });
