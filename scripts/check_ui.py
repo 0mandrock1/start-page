@@ -32,9 +32,26 @@ setTimeout(() => {
   const hInactive = document.activeElement.id !== 'q-tools';
   const fullWidth = Math.abs(accent.getBoundingClientRect().width
     - hero.getBoundingClientRect().width) < 1;
+  const clock = document.getElementById('hm');
+  const variants = ['shear', 'prism', 'scan', 'phase', 'static'];
+  const selected = clock.dataset.clockGlitch;
+  const animationNames = variants.map(name => {
+    clock.dataset.clockGlitch = name;
+    return getComputedStyle(clock, '::before').animationName;
+  });
+  clock.dataset.clockGlitch = selected;
+  const weekday = document.getElementById('dateWeekday');
+  const dateFull = document.getElementById('dateFull');
+  const dateTwoLines = dateFull.getBoundingClientRect().top > weekday.getBoundingClientRect().top;
+  const dateFits = [weekday, dateFull].every(el => el.scrollWidth <= el.clientWidth);
+  const coloredClock = getComputedStyle(clock).color !== getComputedStyle(hero).color;
   accent.click();
   const result = {
-    qFocus, hInactive, fullWidth,
+    qFocus, hInactive, fullWidth, selected,
+    fiveGlitches: variants.includes(selected)
+      && new Set(animationNames).size === 5
+      && animationNames.every(name => name !== 'none'),
+    dateTwoLines, dateFits, coloredClock,
     accentChanged: document.documentElement.dataset.accent === 'purple',
     labelChanged: getComputedStyle(label).borderLeftColor !== initial.label,
     quickLinkChanged: getComputedStyle(quickLink).borderBottomColor !== initial.quickLink,
@@ -56,20 +73,21 @@ try:
     for width, height in [(1920, 1080), (1366, 768)]:
         with tempfile.TemporaryDirectory(prefix="edge-start-ui-") as profile:
             run = subprocess.run([
-                str(edge), "--headless=new", "--disable-gpu",
+                str(edge), "--headless", "--disable-gpu",
                 "--no-first-run", "--disable-background-networking",
                 "--host-resolver-rules=MAP * ~NOTFOUND",
                 "--user-data-dir=" + profile,
                 f"--window-size={width},{height}", "--virtual-time-budget=1900",
                 "--dump-dom", test_html.as_uri(),
             ], capture_output=True, text=True, encoding="utf-8",
-                errors="replace", timeout=30)
+                errors="replace", timeout=45)
         match = re.search(r'<pre id="test-result">(.*?)</pre>', run.stdout)
         if not match:
             raise RuntimeError(f"Edge exit={run.returncode}; no test result at {width}x{height}")
         data = json.loads(match.group(1))
         required = ["qFocus", "hInactive", "fullWidth", "accentChanged",
-                    "labelChanged", "quickLinkChanged", "clickGlitch"]
+                    "labelChanged", "quickLinkChanged", "clickGlitch",
+                    "fiveGlitches", "dateTwoLines", "dateFits", "coloredClock"]
         if height == 1080:
             required.append("fits1080")
         print(f"{width}x{height}: {data}", flush=True)

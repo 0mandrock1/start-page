@@ -1,0 +1,137 @@
+/* Clock variants are selected once per tab; no recurring animations. */
+.clock .hm {
+  color: color-mix(in oklch, var(--page-accent) 86%, var(--foreground));
+  text-shadow:
+    0 0 5px color-mix(in oklch, var(--page-accent) 86%, transparent),
+    0 0 18px color-mix(in oklch, var(--page-accent) 62%, transparent),
+    0 0 34px color-mix(in oklch, var(--page-accent) 38%, transparent);
+}
+.clock .sec {
+  color: color-mix(in oklch, var(--page-accent) 90%, var(--foreground));
+  text-shadow: 0 0 12px color-mix(in oklch, var(--page-accent) 70%, transparent);
+}
+.date {
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  letter-spacing: 0.025em;
+}
+.date > span { display: block; white-space: nowrap; }
+.date #dateWeekday { color: var(--page-accent); font-size: 0.77rem; }
+.date #dateFull { margin-top: 0.1rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Shear: existing split-slice introduction. */
+  .hm[data-clock-glitch="shear"]::before {
+    color: var(--info); animation: shear-a 1336ms steps(1, end) 1 both;
+  }
+  .hm[data-clock-glitch="shear"]::after {
+    color: var(--page-accent); animation: shear-b 1336ms steps(1, end) 1 both;
+  }
+
+  /* 2. Prism: colored duplicates diverge, collapse into the base clock. */
+  .hm[data-clock-glitch="prism"]::before {
+    color: var(--accent-cyan); text-shadow: -2px 0 var(--accent-purple);
+    animation: clock-prism-left 1400ms steps(1, end) 1 both;
+  }
+  .hm[data-clock-glitch="prism"]::after {
+    color: var(--page-accent); text-shadow: 3px 0 var(--accent-lime);
+    animation: clock-prism-right 1400ms steps(1, end) 1 both;
+  }
+
+  /* 3. Scan: two narrow horizontal sync bands. */
+  .hm[data-clock-glitch="scan"]::before {
+    color: var(--accent-cyan);
+    animation: clock-scan-top 1150ms steps(1, end) 1 both;
+  }
+  .hm[data-clock-glitch="scan"]::after {
+    color: var(--page-accent);
+    animation: clock-scan-bottom 1150ms steps(1, end) 1 both;
+  }
+
+  /* 4. Phase: brief ghost image with vertical clock drift. */
+  .hm[data-clock-glitch="phase"]::before {
+    color: var(--page-accent); filter: blur(1px);
+    animation: clock-phase-a 1500ms steps(1, end) 1 both;
+  }
+  .hm[data-clock-glitch="phase"]::after {
+    color: var(--accent-cyan); filter: blur(0.5px);
+    animation: clock-phase-b 1500ms steps(1, end) 1 both;
+  }
+
+  /* 5. Static: chopped blocks flicker through the digits. */
+  .hm[data-clock-glitch="static"]::before {
+    color: var(--foreground); filter: contrast(1.6);
+    animation: clock-static-a 1200ms steps(1, end) 1 both;
+  }
+  .hm[data-clock-glitch="static"]::after {
+    color: var(--page-accent);
+    animation: clock-static-b 1200ms steps(1, end) 1 both;
+  }
+}
+@keyframes clock-prism-left {
+  0% { opacity: .9; transform: translate(-9px, 1px); }
+  15% { opacity: .65; transform: translate(12px, -2px); }
+  29% { opacity: 0; transform: none; }
+  42% { opacity: .75; transform: translate(-6px, 1px); clip-path: inset(0 0 40%); }
+  63% { opacity: .55; transform: translate(4px, 0); clip-path: inset(40% 0 0); }
+  75%, 100% { opacity: 0; transform: none; }
+}
+@keyframes clock-prism-right {
+  0% { opacity: .55; transform: translate(10px, -1px); }
+  18% { opacity: .95; transform: translate(-8px, 1px); }
+  34% { opacity: 0; }
+  49% { opacity: .85; transform: translate(7px, 0); clip-path: inset(50% 0 0); }
+  72% { opacity: .45; transform: translate(-3px, 1px); }
+  85%, 100% { opacity: 0; transform: none; }
+}
+@keyframes clock-scan-top {
+  0% { opacity: .8; clip-path: inset(0 0 78% 0); transform: translateX(-6px); }
+  15% { opacity: .95; clip-path: inset(22% 0 52% 0); transform: translateX(10px); }
+  29% { opacity: 0; }
+  47% { opacity: .9; clip-path: inset(45% 0 35% 0); transform: translateX(-9px); }
+  64% { opacity: .7; clip-path: inset(70% 0 7% 0); transform: translateX(5px); }
+  78%, 100% { opacity: 0; }
+}
+@keyframes clock-scan-bottom {
+  0% { opacity: .85; clip-path: inset(80% 0 0); transform: translateX(5px); }
+  24% { opacity: .95; clip-path: inset(53% 0 29% 0); transform: translateX(-11px); }
+  35% { opacity: 0; }
+  56% { opacity: .9; clip-path: inset(12% 0 68% 0); transform: translateX(8px); }
+  72% { opacity: .6; clip-path: inset(40% 0 35% 0); transform: translateX(-4px); }
+  84%, 100% { opacity: 0; }
+}
+@keyframes clock-phase-a {
+  0% { opacity: .75; transform: translateY(-8px) scaleY(1.08); }
+  20% { opacity: 0; }
+  36% { opacity: .8; transform: translateY(7px) scaleY(.9); }
+  52% { opacity: .4; transform: translateY(-4px); }
+  67% { opacity: .7; transform: translateY(2px); }
+  82%, 100% { opacity: 0; transform: none; }
+}
+@keyframes clock-phase-b {
+  0% { opacity: .6; transform: translateY(7px) scaleX(1.06); }
+  16% { opacity: .9; transform: translateY(-5px); }
+  31% { opacity: 0; }
+  47% { opacity: .7; transform: translateY(5px) scaleX(.94); }
+  66% { opacity: .6; transform: translateY(-2px); }
+  84%, 100% { opacity: 0; transform: none; }
+}
+@keyframes clock-static-a {
+  0% { opacity: 0; }
+  12% { opacity: .95; clip-path: inset(12% 0 70%); transform: translateX(11px); }
+  24% { opacity: .6; clip-path: inset(65% 0 6%); transform: translateX(-7px); }
+  35% { opacity: 0; }
+  49% { opacity: 1; clip-path: inset(36% 0 49%); transform: translateX(5px); }
+  58% { opacity: 0; }
+  74% { opacity: .75; clip-path: inset(78% 0 3%); transform: translateX(-12px); }
+  87%, 100% { opacity: 0; }
+}
+@keyframes clock-static-b {
+  0% { opacity: .7; clip-path: inset(77% 0 3%); transform: translateX(-8px); }
+  18% { opacity: 0; }
+  33% { opacity: .95; clip-path: inset(38% 0 40%); transform: translateX(12px); }
+  46% { opacity: .55; clip-path: inset(5% 0 82%); transform: translateX(-4px); }
+  59% { opacity: 0; }
+  78% { opacity: .9; clip-path: inset(56% 0 23%); transform: translateX(6px); }
+  90%, 100% { opacity: 0; }
+}

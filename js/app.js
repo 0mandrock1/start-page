@@ -38,17 +38,36 @@
     if (h < 18) return '// доброго дня';
     return '// доброго вечора';
   }
+  // П'ять окремих ефектів: один випадковий на відкриття вкладки.
+  const CLOCK_GLITCHES = ['shear', 'prism', 'scan', 'phase', 'static'];
+  const clockGlitchIndex = (() => {
+    try {
+      const bytes = new Uint32Array(1);
+      crypto.getRandomValues(bytes);
+      return bytes[0] % CLOCK_GLITCHES.length;
+    } catch {
+      return Math.floor(Math.random() * CLOCK_GLITCHES.length);
+    }
+  })();
+  const clockGlitch = CLOCK_GLITCHES[clockGlitchIndex];
+  $('hm').dataset.clockGlitch = clockGlitch;
+  console.debug('[start-page] clock glitch selected', { glitch: clockGlitch });
+
   function tick() {
     const d = new Date();
     const hm = pad(d.getHours()) + ':' + pad(d.getMinutes());
     const el = $('hm');
-    if (el.textContent !== hm) { el.textContent = hm; }
+    if (el.textContent !== hm) {
+      el.textContent = hm;
+      el.dataset.t = hm; // копії не відстають після зміни хвилини
+    }
     $('sec').textContent = ':' + pad(d.getSeconds());
     $('greet').textContent = greeting(d.getHours());
-    $('date').textContent = d.toLocaleDateString('uk-UA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    $('dateWeekday').textContent = d.toLocaleDateString('uk-UA', { weekday: 'long' });
+    $('dateFull').textContent = d.toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+    $('date').setAttribute('aria-label', d.toLocaleDateString('uk-UA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
   }
   tick();
-  $('hm').dataset.t = $('hm').textContent; // глітч-копії беруть текст на момент появи
   setInterval(tick, 1000);
 
   // ---------- debris: шкала з цифр π ----------
