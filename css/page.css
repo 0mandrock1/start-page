@@ -170,9 +170,7 @@ label[data-icon="ddgai"]::after { content: "AI"; position: absolute; right: 0.5r
 
 .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 .tile {
-  --n: 4;
   position: relative;
-  transform: translate(calc((var(--n) - 4) * 4px), calc((var(--n) - 4) * -2px));
 }
 .tile a {
   display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
