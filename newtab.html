@@ -53,6 +53,11 @@
           <input id="q-tr" type="text" autocomplete="off" spellcheck="false" placeholder="текст для перекладу…">
           <button type="submit" aria-label="Перекласти"><span aria-hidden="true">↵</span></button>
         </form>
+        <form class="row" data-url="https://github.com/search?q=%s&amp;type=repositories" data-key="h" data-role="search">
+          <label for="q-github" data-icon="github"><span class="ic" aria-hidden="true"></span><span class="sr">github</span></label>
+          <input id="q-github" type="text" autocomplete="off" spellcheck="false" placeholder="пошук репозиторіїв github…">
+          <button type="submit" aria-label="Шукати репозиторії на github"><span aria-hidden="true">↵</span></button>
+        </form>
       </div>
           </section>
 
@@ -104,7 +109,7 @@
     </div>
 
     <footer class="foot">
-      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>a</kbd> задачі · <kbd>n</kbd> нотатка · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
+      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>h</kbd> github · <kbd>a</kbd> задачі · <kbd>n</kbd> нотатка · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
       <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
     </footer>
   </main>
