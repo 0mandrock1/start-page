@@ -21,10 +21,15 @@
   <div class="crop bl" aria-hidden="true"></div>
   <div class="crop br" aria-hidden="true"></div>
   <div class="ruler" id="ruler" aria-hidden="true"></div>
-  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.0 // π = 3.14159265358979</div>
+  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.2 // π = 3.14159265358979</div>
 
   <main class="wrap">
     <h1 class="sr">Стартова сторінка</h1>
+
+    <header class="page-header">
+      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>h</kbd> tools · <kbd>a</kbd> задачі · <kbd>n</kbd> нотатка · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
+      <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
+    </header>
 
     <section id="prompts" class="block" aria-labelledby="h-prompts">
       <h2 class="label" id="h-prompts">// запити</h2>
@@ -58,6 +63,7 @@
           <label for="q-github" data-icon="github"><span class="ic" aria-hidden="true"></span><span class="sr">github</span></label>
           <input id="q-github" type="text" autocomplete="off" spellcheck="false" placeholder="пошук репозиторіїв github…">
           <button type="submit" aria-label="Шукати репозиторії на github"><span aria-hidden="true">↵</span></button>
+        </form>
         <form class="row" data-url="https://tools.mandrock.me/%s" data-key="h" data-role="tool" data-path="true">
           <label for="q-tools" data-icon="tools"><span class="ic" aria-hidden="true"></span><span class="sr">tools.mandrock.me</span></label>
           <input id="q-tools" name="tools-path" type="text" list="tools-paths" autocomplete="on" spellcheck="false" placeholder="tools.mandrock.me / шлях…">
@@ -120,10 +126,6 @@
       </section>
     </div>
 
-    <footer class="foot">
-      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>h</kbd> tools · <kbd>a</kbd> задачі · <kbd>n</kbd> нотатка · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
-      <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
-    </footer>
   </main>
 
   <script src="js/mandrock0-ambient.js" data-profile="calm" data-layers="grid,foci,debris"></script>

@@ -33,6 +33,8 @@ body {
   margin: 0 auto;
   padding: clamp(1.5rem, 4vh, 2.5rem) 1.5rem 3rem;
 }
+.page-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.page-header .keys { flex: 1; }
 
 /* ---------- hero: прапор-флаєр ---------- */
 .hero { margin-bottom: 1.5rem; }
@@ -154,7 +156,6 @@ label[data-icon="ddgai"]::after { content: "AI"; position: absolute; right: 0.5r
 /* ---------- лінки ---------- */
 /* Quick access */
 .quick-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; margin-top: 1.25rem; }
-.quick-link {
 .read-split { grid-column: 1 / -1; display: flex; border: 1px dashed var(--page-accent); border-radius: var(--radius-card); }
 .read-split a, .kb-flow, .quick-link {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; min-width: 0; min-height: 40px;
@@ -262,8 +263,7 @@ textarea { min-height: 11rem; resize: vertical; line-height: 1.55; }
 .ghost:active { scale: 0.96; }
 .ghost .dot { margin-right: 0.25rem; }
 
-/* ---------- футер ---------- */
-.foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+/* ---------- підказки клавіш ---------- */
 .keys { margin: 0; font-size: 0.75rem; color: var(--muted-foreground); }
 kbd { font: inherit; padding: 0 0.3em; border-radius: var(--radius-card); box-shadow: 0 0 0 1px var(--border); color: var(--foreground); }
 
