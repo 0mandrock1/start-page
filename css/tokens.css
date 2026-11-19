@@ -1,0 +1,98 @@
+/*
+ * mandrock0 design tokens — extracted verbatim from 0mandrock1/designClaude
+ * (src/index.css, commit fac28d4). Dark-only: there is no light palette in
+ * this system, :root already holds the dark values, .dark is a no-op alias.
+ * Self-contained: drop into any project, no Tailwind/build step required.
+ */
+
+:root {
+  /* ---- UA theme: tell the browser this is a dark page ----
+     without it iOS Safari treats the page as light: white overscroll,
+     white form controls/scrollbars, light toolbar tint in both modes */
+  color-scheme: dark;
+
+  /* ---- radii ---- */
+  --radius: 0.625rem;
+  --radius-card: 0.25rem;
+  --radius-control: 1rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* ---- brand accents (raw) ---- */
+  --accent-purple: oklch(70% .30 320);
+  --accent-cyan: oklch(80% .15 205);
+  --accent-lime: oklch(86% .21 150);
+  --accent-crimson: oklch(60% .23 13);
+  --accent-shader: var(--accent-purple);
+
+  /* ---- role layer (semantic aliases onto the accents) ---- */
+  --action: var(--accent-purple);
+  --info: var(--accent-cyan);
+  --ok: var(--accent-lime);
+  --alive: var(--accent-crimson);
+
+  /* ---- surface / text colors (shadcn semantic layer) ---- */
+  --background: oklch(11% .105 14);
+  --foreground: oklch(96% .035 20);
+  --card: oklch(16.5% .125 12);
+  --card-foreground: var(--foreground);
+  --popover: oklch(16.5% .125 12);
+  --popover-foreground: var(--foreground);
+  --primary: var(--accent-shader);
+  --primary-foreground: oklch(10% .04 356);
+  --secondary: oklch(23.5% .14 12);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(20% .13 12);
+  --muted-foreground: oklch(70% .095 16);
+  --accent: var(--accent-shader);
+  --accent-foreground: oklch(10% .04 356);
+  --destructive: oklch(70% .18 38);
+
+  /* ---- borders / outlines / focus ring ---- */
+  --border: oklch(33% .16 10 / .55);
+  --input: oklch(33% .16 10 / .7);
+  --ring: var(--accent-shader);
+
+  /* ---- glow / shadow system (one hue, three strengths) ---- */
+  --glow: var(--accent-shader);
+  --glow-ambient: 0 0 0 1px color-mix(in oklch, var(--glow) 14%, transparent);
+  --glow-attention: 0 0 0 1px color-mix(in oklch, var(--glow) 55%, transparent),
+                     0 0 20px color-mix(in oklch, var(--glow) 40%, transparent);
+  --glow-interaction: 0 0 0 1.5px color-mix(in oklch, var(--glow) 85%, transparent),
+                       0 0 28px color-mix(in oklch, var(--glow) 60%, transparent);
+
+  /* ---- chart palette ---- */
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+
+  /* ---- sidebar ---- */
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: var(--accent-shader);
+  --sidebar-primary-foreground: oklch(10% .04 356);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: var(--accent-shader);
+
+  /* ---- typography ---- */
+  --font-sans: 'Geist Variable', sans-serif;
+  --font-heading: var(--font-sans);
+
+  /* ---- motion gate (a11y: prefers-reduced-motion drives this to 0) ---- */
+  --glitch-budget: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --glitch-budget: 0;
+  }
+}

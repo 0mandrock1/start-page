@@ -1,0 +1,12 @@
+/* mandrock0 page accents — рантайм-шар поверх mandrock0-tokens.css
+ * Джерело правди: https://tools.mandrock.me/palettes/palettes.json
+ * Використання:  <html data-accent="lime">
+ *                <link rel="stylesheet" href=".../mandrock0-tokens.css">
+ *                <link rel="stylesheet" href="https://tools.mandrock.me/palettes/accents.css">
+ * Сторінка далі читає лише var(--page-accent) і НЕ називає конкретний колір.
+ */
+:root{ --page-accent: var(--accent-crimson); }
+[data-accent="crimson"]{ --page-accent: var(--accent-crimson); }
+[data-accent="purple"] { --page-accent: var(--accent-purple);  }
+[data-accent="cyan"]   { --page-accent: var(--accent-cyan);    }
+[data-accent="lime"]   { --page-accent: var(--accent-lime);    }

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="uk" data-accent="crimson">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="mandrock0-section" content="alive">
+  <title>start // mandrock0</title>
+  <link rel="icon" href="icons/icon32.png">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/accents.css">
+  <link rel="stylesheet" href="css/page.css">
+</head>
+<body>
+  <a class="skip" href="#prompts">до полів вводу</a>
+
+  <!-- debris: лише на полях, поза деревом доступності -->
+  <div class="crop tl" aria-hidden="true"></div>
+  <div class="crop tr" aria-hidden="true"></div>
+  <div class="crop bl" aria-hidden="true"></div>
+  <div class="crop br" aria-hidden="true"></div>
+  <div class="ruler" id="ruler" aria-hidden="true"></div>
+  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.0.0 // π = 3.14159265358979</div>
+
+  <main class="wrap">
+    <h1 class="sr">Стартова сторінка</h1>
+
+    <header class="hero">
+      <p class="eyebrow" id="greet">// …</p>
+      <p class="clock"><span class="hm" id="hm" data-t="00:00">00:00</span><span class="sec" id="sec" aria-hidden="true">:00</span></p>
+      <p class="date" id="date"></p>
+    </header>
+
+    <section id="prompts" class="block" aria-labelledby="h-prompts">
+      <h2 class="label" id="h-prompts">// запити</h2>
+      <div class="rows">
+        <form class="row" data-url="https://claude.ai/new?q=%s" data-key="c" data-role="ai">
+          <label for="q-claude"><i class="dot" aria-hidden="true"></i>claude</label>
+          <input id="q-claude" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у claude…">
+          <button type="submit" aria-label="Відкрити в claude"><span aria-hidden="true">↵</span></button>
+        </form>
+        <form class="row" data-url="https://chatgpt.com/?q=%s" data-key="g" data-role="ai">
+          <label for="q-gpt"><i class="dot" aria-hidden="true"></i>chatgpt</label>
+          <input id="q-gpt" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у chatgpt…">
+          <button type="submit" aria-label="Відкрити в chatgpt"><span aria-hidden="true">↵</span></button>
+        </form>
+        <form class="row" data-url="https://duck.ai/?q=%s" data-key="d" data-role="ai">
+          <label for="q-duckai"><i class="dot" aria-hidden="true"></i>duck.ai</label>
+          <input id="q-duckai" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у duck.ai…">
+          <button type="submit" aria-label="Відкрити в duck.ai"><span aria-hidden="true">↵</span></button>
+        </form>
+        <form class="row" data-url="https://duckduckgo.com/?q=%s" data-key="s" data-role="search" data-smart="url">
+          <label for="q-ddg"><i class="dot" aria-hidden="true"></i>duckduckgo</label>
+          <input id="q-ddg" type="text" autocomplete="off" spellcheck="false" placeholder="пошук або адреса…">
+          <button type="submit" aria-label="Шукати в duckduckgo"><span aria-hidden="true">↵</span></button>
+        </form>
+        <form class="row" data-url="https://translate.google.com/?sl=auto&amp;tl=uk&amp;op=translate&amp;text=%s" data-key="t" data-role="tool">
+          <label for="q-tr"><i class="dot" aria-hidden="true"></i>переклад → uk</label>
+          <input id="q-tr" type="text" autocomplete="off" spellcheck="false" placeholder="текст для перекладу…">
+          <button type="submit" aria-label="Перекласти"><span aria-hidden="true">↵</span></button>
+        </form>
+      </div>
+      <p class="legend" aria-hidden="true"><i class="dot" data-role="ai"></i> ai-чат <i class="dot" data-role="search"></i> пошук <i class="dot" data-role="tool"></i> інструмент</p>
+    </section>
+
+    <section class="block" aria-labelledby="h-links">
+      <div class="head">
+        <h2 class="label" id="h-links">// лінки</h2>
+        <button type="button" class="ghost" id="editLinks" aria-pressed="false">змінити</button>
+      </div>
+      <ul class="tiles" id="tiles"></ul>
+      <form class="addlink" id="addLink" hidden>
+        <input id="nl-name" type="text" autocomplete="off" placeholder="назва" aria-label="Назва лінка" required>
+        <input id="nl-url" type="text" autocomplete="off" placeholder="https://…" aria-label="Адреса лінка" required>
+        <button type="submit" class="ghost">+ додати</button>
+      </form>
+      <ul class="top" id="top" aria-label="Часто відвідувані" hidden></ul>
+    </section>
+
+    <div class="cols">
+      <section class="block" aria-labelledby="h-tasks">
+        <h2 class="label" id="h-tasks">// задачі</h2>
+        <form class="addtask" id="addTask">
+          <input id="task-in" type="text" autocomplete="off" placeholder="нова задача, Enter" aria-label="Нова задача">
+        </form>
+        <ul class="tasks" id="tasks"></ul>
+        <p class="empty" id="tasksEmpty" hidden>пусто. добре.</p>
+      </section>
+
+      <section class="block" aria-labelledby="h-note">
+        <h2 class="label" id="h-note">// нотатка</h2>
+        <textarea id="note" spellcheck="false" aria-label="Швидка нотатка" placeholder="сюди можна кинути що завгодно — збережеться саме"></textarea>
+        <p class="saved" id="saved" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <footer class="foot">
+      <p class="keys"><kbd>c</kbd> claude · <kbd>g</kbd> chatgpt · <kbd>d</kbd> duck.ai · <kbd>s</kbd> пошук · <kbd>t</kbd> переклад · <kbd>1</kbd>–<kbd>9</kbd> лінки · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> у новій вкладці</p>
+      <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
+    </footer>
+  </main>
+
+  <script src="js/ambient.js" data-profile="calm" data-layers="grid,foci,debris"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
