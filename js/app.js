@@ -243,7 +243,9 @@
   // ---------- нотатка ----------
   const note = $('note');
   let noteTimer = 0;
+  function updateNoteCount() { $('noteCount').textContent = Array.from(note.value).length + ' символів'; }
   note.addEventListener('input', () => {
+    updateNoteCount();
     clearTimeout(noteTimer);
     $('saved').textContent = '…';
     noteTimer = setTimeout(async () => {
@@ -274,6 +276,8 @@
       return;
     }
     const key = e.key.toLowerCase();
+    if (key === 'a') { e.preventDefault(); (tasksEl.querySelector('.task .t') || $('task-in')).focus(); return; }
+    if (key === 'n') { e.preventDefault(); note.focus(); return; }
     const form = document.querySelector('form.row[data-key="' + key + '"]');
     if (form) { e.preventDefault(); form.querySelector('input').focus(); return; }
     if (/^[1-9]$/.test(key)) {
@@ -293,6 +297,7 @@
     links = Array.isArray(l) ? l : DEFAULT_LINKS.slice();
     tasks = Array.isArray(t) ? t : [];
     note.value = typeof n === 'string' ? n : '';
+    updateNoteCount();
     setAccent(ACCENTS.includes(a) ? a : 'crimson');
     renderLinks();
     renderTasks();
