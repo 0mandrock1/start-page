@@ -102,6 +102,25 @@
   let editing = false;
   const tiles = $('tiles');
 
+  // favicon: локальний кеш браузера (_favicon), запасний варіант — літера
+  function favicon(l) {
+    const letter = () => {
+      const s = document.createElement('span');
+      s.className = 'fav fb'; s.setAttribute('aria-hidden', 'true');
+      s.textContent = (l.n || '?').trim().charAt(0);
+      return s;
+    };
+    if (!(globalThis.chrome && chrome.runtime && chrome.runtime.getURL)) return letter();
+    const img = document.createElement('img');
+    img.className = 'fav'; img.alt = ''; img.width = 20; img.height = 20;
+    const u = new URL(chrome.runtime.getURL('/_favicon/'));
+    u.searchParams.set('pageUrl', l.u);
+    u.searchParams.set('size', '32');
+    img.src = u.toString();
+    img.addEventListener('error', () => img.replaceWith(letter()), { once: true });
+    return img;
+  }
+
   function renderLinks() {
     tiles.textContent = '';
     links.forEach((l, i) => {
@@ -110,9 +129,14 @@
       li.style.setProperty('--n', piDigit(i + 7));
       const a = document.createElement('a');
       a.href = l.u;
+      const left = document.createElement('span');
+      left.style.cssText = 'display:flex;align-items:center;min-width:0';
+      left.appendChild(favicon(l));
       const name = document.createElement('span');
+      name.className = 'nm';
       name.textContent = l.n;
-      a.appendChild(name);
+      left.appendChild(name);
+      a.appendChild(left);
       if (i < 9) {
         const k = document.createElement('span');
         k.className = 'k'; k.setAttribute('aria-hidden', 'true');

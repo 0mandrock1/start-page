@@ -20,7 +20,7 @@
   <div class="crop bl" aria-hidden="true"></div>
   <div class="crop br" aria-hidden="true"></div>
   <div class="ruler" id="ruler" aria-hidden="true"></div>
-  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.0.0 // π = 3.14159265358979</div>
+  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.1.0 // π = 3.14159265358979</div>
 
   <main class="wrap">
     <h1 class="sr">Стартова сторінка</h1>
@@ -35,33 +35,32 @@
       <h2 class="label" id="h-prompts">// запити</h2>
       <div class="rows">
         <form class="row" data-url="https://claude.ai/new?q=%s" data-key="c" data-role="ai">
-          <label for="q-claude"><i class="dot" aria-hidden="true"></i>claude</label>
+          <label for="q-claude" data-icon="claude"><span class="ic" aria-hidden="true"></span><span class="sr">claude</span></label>
           <input id="q-claude" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у claude…">
           <button type="submit" aria-label="Відкрити в claude"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://chatgpt.com/?q=%s" data-key="g" data-role="ai">
-          <label for="q-gpt"><i class="dot" aria-hidden="true"></i>chatgpt</label>
+          <label for="q-gpt" data-icon="openai"><span class="ic" aria-hidden="true"></span><span class="sr">chatgpt</span></label>
           <input id="q-gpt" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у chatgpt…">
           <button type="submit" aria-label="Відкрити в chatgpt"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://duck.ai/?q=%s" data-key="d" data-role="ai">
-          <label for="q-duckai"><i class="dot" aria-hidden="true"></i>duck.ai</label>
+          <label for="q-duckai" data-icon="ddgai"><span class="ic" aria-hidden="true"></span><span class="sr">duck.ai</span></label>
           <input id="q-duckai" type="text" autocomplete="off" spellcheck="false" placeholder="новий чат у duck.ai…">
           <button type="submit" aria-label="Відкрити в duck.ai"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://duckduckgo.com/?q=%s" data-key="s" data-role="search" data-smart="url">
-          <label for="q-ddg"><i class="dot" aria-hidden="true"></i>duckduckgo</label>
+          <label for="q-ddg" data-icon="duckduckgo"><span class="ic" aria-hidden="true"></span><span class="sr">duckduckgo</span></label>
           <input id="q-ddg" type="text" autocomplete="off" spellcheck="false" placeholder="пошук або адреса…">
           <button type="submit" aria-label="Шукати в duckduckgo"><span aria-hidden="true">↵</span></button>
         </form>
         <form class="row" data-url="https://translate.google.com/?sl=auto&amp;tl=uk&amp;op=translate&amp;text=%s" data-key="t" data-role="tool">
-          <label for="q-tr"><i class="dot" aria-hidden="true"></i>переклад → uk</label>
+          <label for="q-tr" data-icon="translate"><span class="ic" aria-hidden="true"></span><span class="sr">переклад → uk</span></label>
           <input id="q-tr" type="text" autocomplete="off" spellcheck="false" placeholder="текст для перекладу…">
           <button type="submit" aria-label="Перекласти"><span aria-hidden="true">↵</span></button>
         </form>
       </div>
-      <p class="legend" aria-hidden="true"><i class="dot" data-role="ai"></i> ai-чат <i class="dot" data-role="search"></i> пошук <i class="dot" data-role="tool"></i> інструмент</p>
-    </section>
+          </section>
 
     <section class="block" aria-labelledby="h-links">
       <div class="head">
@@ -100,7 +99,7 @@
     </footer>
   </main>
 
-  <script src="js/ambient.js" data-profile="calm" data-layers="grid,foci,debris"></script>
+  <script src="js/mandrock0-ambient.js" data-profile="calm" data-layers="grid,foci,debris"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
