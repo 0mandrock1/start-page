@@ -221,7 +221,15 @@
       tasksEl.appendChild(li);
     });
     $('tasksEmpty').hidden = tasks.length > 0;
+    $('tasksCount').textContent = tasks.length ? 'активні: ' + tasks.filter((t) => !t.done).length : '';
+    $('clearDone').hidden = !tasks.some((t) => t.done);
   }
+  $('clearDone').addEventListener('click', () => {
+    tasks = tasks.filter((t) => !t.done);
+    store.set('tasks', tasks);
+    renderTasks();
+    $('task-in').focus();
+  });
   $('addTask').addEventListener('submit', (e) => {
     e.preventDefault();
     const v = $('task-in').value.trim();
