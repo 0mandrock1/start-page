@@ -189,6 +189,12 @@ label[data-icon="ddgai"]::after { content: "AI"; position: absolute; right: 0.5r
 .tile .fav.fb { display: inline-grid; place-items: center; background: var(--secondary); color: var(--page-accent); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
 .tile .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tile .k { color: var(--muted-foreground); font-size: 0.75rem; }
+.tile[draggable="true"] { cursor: grab; }
+.tile.dragging { opacity: 0.5; cursor: grabbing; }
+.tile.drop-target a { box-shadow: var(--glow-interaction); }
+.tile-move { display: flex; gap: 0.25rem; margin-top: 0.25rem; }
+.tile-move button { min-width: 40px; min-height: 40px; background: var(--card); color: var(--foreground); border: 1px solid var(--border); border-radius: var(--radius-card); font: inherit; cursor: pointer; }
+.tile-move button:disabled { opacity: 0.4; cursor: default; }
 .tile .x {
   position: absolute; top: -0.5rem; right: -0.5rem; z-index: 1;
   width: 1.5rem; height: 1.5rem; padding: 0;

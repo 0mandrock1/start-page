@@ -102,6 +102,16 @@
   let links = DEFAULT_LINKS.slice();
   let editing = false;
   const tiles = $('tiles');
+  let draggedLink = null;
+
+  function moveLink(from, to) {
+    if (from === to || from < 0 || to < 0 || from >= links.length || to >= links.length) return;
+    const [link] = links.splice(from, 1);
+    links.splice(to, 0, link);
+    store.set('links', links);
+    renderLinks();
+    $('linksStatus').textContent = link.n + ': ' + (to + 1) + ' / ' + links.length;
+  }
 
   // favicon: локальний кеш браузера (_favicon), запасний варіант — літера
   function favicon(l) {
@@ -146,6 +156,49 @@
       }
       li.appendChild(a);
       if (editing) {
+        li.draggable = true;
+        a.draggable = false;
+        li.addEventListener('dragstart', (e) => {
+          draggedLink = i;
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', String(i));
+          li.classList.add('dragging');
+        });
+        li.addEventListener('dragover', (e) => {
+          if (draggedLink === null || draggedLink === i) return;
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          li.classList.add('drop-target');
+        });
+        li.addEventListener('dragleave', () => li.classList.remove('drop-target'));
+        li.addEventListener('drop', (e) => {
+          if (draggedLink === null) return;
+          e.preventDefault();
+          const from = draggedLink;
+          draggedLink = null;
+          moveLink(from, i);
+        });
+        li.addEventListener('dragend', () => {
+          draggedLink = null;
+          tiles.querySelectorAll('.dragging, .drop-target').forEach((el) => el.classList.remove('dragging', 'drop-target'));
+        });
+        const controls = document.createElement('div');
+        controls.className = 'tile-move';
+        [[-1, '←', 'Перемістити ліворуч '], [1, '→', 'Перемістити праворуч ']].forEach(([step, symbol, label]) => {
+          const button = document.createElement('button');
+          button.type = 'button'; button.textContent = symbol;
+          button.setAttribute('aria-label', label + l.n);
+          button.disabled = i + step < 0 || i + step >= links.length;
+          button.addEventListener('click', () => {
+            const target = i + step;
+            moveLink(i, target);
+            const moved = tiles.children[target];
+            const next = moved.querySelectorAll('.tile-move button')[step < 0 ? 0 : 1];
+            (next.disabled ? moved.querySelector('a') : next).focus();
+          });
+          controls.appendChild(button);
+        });
+        li.appendChild(controls);
         const x = document.createElement('button');
         x.type = 'button'; x.className = 'x';
         x.setAttribute('aria-label', 'Видалити лінк ' + l.n);
