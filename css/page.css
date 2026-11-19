@@ -150,6 +150,22 @@ label[data-icon="ddgai"]::after { content: "AI"; position: absolute; right: 0.5r
 .row button:active { scale: 0.96; }
 
 /* ---------- лінки ---------- */
+/* Quick access */
+.quick-links { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; }
+.read-split { display: flex; border: 1px dashed var(--page-accent); border-radius: var(--radius-card); }
+.read-split a, .kb-flow {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 40px;
+  padding: 0.5rem 1.25rem; font: inherit; font-weight: 700; text-decoration: none;
+  transition-property: color, background-color, box-shadow, scale; transition-duration: 150ms; transition-timing-function: ease-out;
+}
+.read-split a { color: var(--foreground); }
+.read-split a + a { border-left: 1px dashed var(--page-accent); }
+.kb-flow { gap: 0.75rem; background: var(--page-accent); color: var(--primary-foreground); border-radius: var(--radius-control); }
+@media (hover: hover) {
+  .read-split a:hover, .kb-flow:hover { box-shadow: var(--glow-interaction); }
+}
+.read-split a:active, .kb-flow:active { scale: 0.96; }
+
 .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 .tile {
   --n: 4;
@@ -264,6 +280,7 @@ kbd { font: inherit; padding: 0 0.3em; border-radius: var(--radius-card); box-sh
   .wrap { display: flex; flex-direction: column; }
   .wrap > * { width: 100%; }
   .wrap > .sr { width: 1px; }
+  .quick-links { flex-wrap: wrap; }
   .hero { order: -1; }
   .row { grid-template-columns: 3.25rem 1fr 2.75rem; transform: none; }
   .tiles { grid-template-columns: repeat(2, 1fr); }
