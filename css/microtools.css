@@ -61,12 +61,17 @@
 }
 .clip-radar {
   position: relative;
-  margin-top: 0.5rem;
+  min-width: 0;
+  margin-top: 0;
 }
 .clip-radar-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  min-height: 36px;
-  font-size: 0.75rem;
+  min-height: 40px;
+  padding: 0.3rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.06em;
   color: var(--page-accent);
   border: 1px dashed color-mix(in oklch, var(--page-accent) 45%, var(--border));

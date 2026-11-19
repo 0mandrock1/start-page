@@ -32,6 +32,19 @@ setTimeout(() => {
   const hInactive = document.activeElement.id !== 'q-tools';
   const fullWidth = Math.abs(accent.getBoundingClientRect().width
     - hero.getBoundingClientRect().width) < 1;
+  const nav = document.querySelector('nav.quick-links');
+  const radar = document.getElementById('clipboardRadarWrap');
+  const radarButton = document.getElementById('clipboardRadar');
+  const article = nav.querySelector('a[href="https://articles.mandrock.me/"]');
+  const radarRect = radarButton.getBoundingClientRect();
+  const articleRect = article.getBoundingClientRect();
+  const radarReplacedTools = radar.parentElement === nav
+    && !nav.querySelector('a[href="https://tools.mandrock.me/"]')
+    && Math.abs(radarRect.top - articleRect.top) < 1
+    && Math.abs(radarRect.height - articleRect.height) < 1
+    && radarRect.left < articleRect.left
+    && Math.abs(radarRect.width - articleRect.width) < 1;
+  const radarLabelFits = radarButton.scrollWidth <= radarButton.clientWidth;
   const clock = document.getElementById('hm');
   const variants = ['shear', 'prism', 'scan', 'phase', 'static'];
   const selected = clock.dataset.clockGlitch;
@@ -62,7 +75,7 @@ setTimeout(() => {
   document.getElementById('accentName').textContent = 'crimson';
   accent.click();
   const result = {
-    qFocus, hInactive, fullWidth, selected,
+    qFocus, hInactive, fullWidth, radarReplacedTools, radarLabelFits, selected,
     fiveGlitches: variants.includes(selected)
       && new Set(animationNames).size === 5
       && animationNames.every(name => name !== 'none'),
@@ -85,7 +98,7 @@ test_html.parent.mkdir(exist_ok=True)
 test_html.write_text(source.replace("<head>", f'<head><base href="{base}">')
                      .replace("</body>", probe + "</body>"), encoding="utf-8")
 try:
-    for width, height in [(1920, 1080), (1366, 768)]:
+    for width, height in [(1920, 1080), (1366, 768), (390, 844)]:
         with tempfile.TemporaryDirectory(prefix="edge-start-ui-") as profile:
             run = subprocess.run([
                 str(edge), "--headless", "--disable-gpu",
@@ -100,7 +113,8 @@ try:
         if not match:
             raise RuntimeError(f"Edge exit={run.returncode}; no test result at {width}x{height}")
         data = json.loads(match.group(1))
-        required = ["qFocus", "hInactive", "fullWidth", "accentChanged",
+        required = ["qFocus", "hInactive", "fullWidth", "radarReplacedTools",
+                    "radarLabelFits", "accentChanged",
                     "labelChanged", "quickLinkChanged", "clickGlitch",
                     "fiveGlitches", "dateTwoLines", "dateFits", "coloredClock",
                     "timeWarpWorks", "cycleWorks", "jackpotWorks"]

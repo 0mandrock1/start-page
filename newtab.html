@@ -23,7 +23,7 @@
   <div class="crop bl" aria-hidden="true"></div>
   <div class="crop br" aria-hidden="true"></div>
   <div class="ruler" id="ruler" aria-hidden="true"></div>
-  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.7 // π = 3.14159265358979</div>
+  <div class="margin-note" aria-hidden="true">mandrock0 // start.page // v1.2.8 // π = 3.14159265358979</div>
 
   <main class="wrap">
     <h1 class="sr">Стартова сторінка</h1>
@@ -85,31 +85,30 @@
           <a href="https://read.mandrock.me/drafts" aria-label="read.mandrock.me — чернетки"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l4 4v12H5zM14 4v5h5M8 13h8M8 16h6"/></svg><span>drafts</span></a>
         </div>
         <a class="kb-flow" href="https://mandrock.me/kb-flow/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h4v4H5zM15 14h4v4h-4zM9 8h3a5 5 0 0 1 5 5v1M7 10v5a2 2 0 0 0 2 2h2"/></svg><span>kb-flow</span></a>
-        <a class="quick-link" href="https://tools.mandrock.me/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5a5 5 0 0 0-6 6L4 15l5 5 4-4a5 5 0 0 0 6-6l-3 3-3-3z"/></svg><span>tools</span></a>
+        <div class="clip-radar" id="clipboardRadarWrap">
+          <button type="button" class="ghost clip-radar-trigger" id="clipboardRadar" aria-label="Буфер-радар" title="Аналізувати буфер обміну" aria-expanded="false" aria-controls="clipboardRadarPanel">◈ radar</button>
+          <section class="clip-radar-panel" id="clipboardRadarPanel" aria-label="Clipboard Radar" hidden>
+            <div class="clip-radar-head"><strong>// clipboard radar</strong><button type="button" class="clip-radar-close" id="clipboardRadarClose" aria-label="Закрити">×</button></div>
+            <p class="clip-radar-status" id="clipboardRadarStatus" role="status" aria-live="polite">Дані читаються лише після натискання.</p>
+            <div id="clipboardRadarPaste" hidden>
+              <label for="clipboardRadarInput">Доступ до буфера відхилено. Встав вручну через Ctrl+V:</label>
+              <textarea id="clipboardRadarInput" rows="2" spellcheck="false" placeholder="Ctrl+V · проаналізувати локально"></textarea>
+            </div>
+            <div id="clipboardRadarResult" hidden>
+              <div class="clip-radar-type" id="clipboardRadarType"></div>
+              <pre class="clip-radar-preview" id="clipboardRadarPreview"></pre>
+              <div class="clip-radar-actions">
+                <button type="button" class="ghost clip-radar-copy" id="clipboardRadarCopy" aria-label="Копіювати">копіювати</button>
+                <button type="button" class="ghost" id="clipboardRadarAction" hidden></button>
+              </div>
+            </div>
+          </section>
+        </div>
         <a class="quick-link" href="https://articles.mandrock.me/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 11h8M8 14h8M8 17h5"/></svg><span>articles</span></a>
         <a class="quick-link" href="https://tools.mandrock.me/runs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM7 10l3 2-3 2M12 15h5"/></svg><span>runs</span></a>
         <a class="quick-link" href="https://tools.mandrock.me/password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5zM12 14v3"/></svg><span>password</span></a>
       </nav>
       <button type="button" class="ghost" id="accent" aria-label="Змінити акцент"><i class="dot" aria-hidden="true"></i> акцент: <span id="accentName">crimson</span></button>
-      <div class="clip-radar" id="clipboardRadarWrap">
-        <button type="button" class="ghost clip-radar-trigger" id="clipboardRadar" aria-expanded="false" aria-controls="clipboardRadarPanel">◈ буфер / radar</button>
-        <section class="clip-radar-panel" id="clipboardRadarPanel" aria-label="Clipboard Radar" hidden>
-          <div class="clip-radar-head"><strong>// clipboard radar</strong><button type="button" class="clip-radar-close" id="clipboardRadarClose" aria-label="Закрити">×</button></div>
-          <p class="clip-radar-status" id="clipboardRadarStatus" role="status" aria-live="polite">Дані читаються лише після натискання.</p>
-          <div id="clipboardRadarPaste" hidden>
-            <label for="clipboardRadarInput">Доступ до буфера відхилено. Встав вручну через Ctrl+V:</label>
-            <textarea id="clipboardRadarInput" rows="2" spellcheck="false" placeholder="Ctrl+V · проаналізувати локально"></textarea>
-          </div>
-          <div id="clipboardRadarResult" hidden>
-            <div class="clip-radar-type" id="clipboardRadarType"></div>
-            <pre class="clip-radar-preview" id="clipboardRadarPreview"></pre>
-            <div class="clip-radar-actions">
-              <button type="button" class="ghost clip-radar-copy" id="clipboardRadarCopy" aria-label="Копіювати">копіювати</button>
-              <button type="button" class="ghost" id="clipboardRadarAction" hidden></button>
-            </div>
-          </div>
-        </section>
-      </div>
     </aside>
 
     <section class="block" aria-labelledby="h-links">
