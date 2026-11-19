@@ -286,6 +286,93 @@ kbd { font: inherit; padding: 0 0.3em; border-radius: var(--radius-card); box-sh
   color: var(--muted-foreground); opacity: 0.45; pointer-events: none; white-space: nowrap; z-index: 1;
 }
 
+/* ---------- акцент: видимий на всій сторінці, глітч лише при взаємодії ---------- */
+#accent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  min-height: 40px;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--foreground);
+  border: 1px solid color-mix(in oklch, var(--page-accent) 65%, transparent);
+  background: linear-gradient(105deg,
+    color-mix(in oklch, var(--page-accent) 22%, var(--card)),
+    var(--card) 85%);
+  box-shadow: inset 3px 0 0 var(--page-accent);
+}
+#accent .dot { margin-right: 0; box-shadow: 0 0 10px var(--page-accent); }
+#accentName { font-weight: 800; color: var(--page-accent); }
+#accent::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  pointer-events: none;
+  background: var(--page-accent);
+  opacity: 0.8;
+}
+#accent::before {
+  content: "";
+  position: absolute;
+  inset: 28% 0 34%;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent 4%,
+    color-mix(in oklch, var(--page-accent) 65%, transparent) 22%,
+    transparent 86%);
+}
+.label { border-left: 2px solid var(--page-accent); padding-left: 0.5rem; }
+.page-header kbd { color: var(--page-accent); border: 1px solid color-mix(in oklch, var(--page-accent) 35%, transparent); box-shadow: none; }
+.hero .date::before { content: "▏"; color: var(--page-accent); margin-right: 0.4rem; }
+.row { background-image: linear-gradient(90deg,
+  color-mix(in oklch, var(--page-accent) 10%, transparent), transparent 30%); }
+.row .service-home { box-shadow: inset 2px 0 0 color-mix(in oklch, var(--page-accent) 65%, transparent); }
+.row:focus-within .service-home { box-shadow: inset 3px 0 0 var(--page-accent); }
+.quick-link, .kb-flow { position: relative; overflow: hidden; }
+.quick-link {
+  background: color-mix(in oklch, var(--page-accent) 7%, var(--card));
+  border-bottom: 1px solid color-mix(in oklch, var(--page-accent) 42%, transparent);
+}
+.quick-link svg { color: var(--page-accent); }
+.tile a {
+  position: relative;
+  overflow: hidden;
+  border-left: 2px solid color-mix(in oklch, var(--page-accent) 55%, var(--border));
+}
+.tile .k { color: color-mix(in oklch, var(--page-accent) 65%, var(--muted-foreground)); }
+.task:not(.done) button.t::before { color: var(--page-accent); }
+.quick-link::after, .kb-flow::after, .tile a::after {
+  content: "";
+  position: absolute;
+  inset: 28% 0 40%;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent,
+    color-mix(in oklch, var(--page-accent) 55%, transparent), transparent);
+}
+@keyframes accent-shear {
+  0%, 100% { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+  16% { opacity: .9; transform: translateX(-11px); clip-path: inset(12% 0 54% 0); }
+  34% { opacity: .65; transform: translateX(8px); clip-path: inset(58% 0 10% 0); }
+  57% { opacity: .85; transform: translateX(-5px); clip-path: inset(35% 0 37% 0); }
+  78% { opacity: .5; transform: translateX(4px); clip-path: inset(72% 0 8% 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #accent.accent-switch::before { animation: accent-shear 440ms steps(1, end) 1; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #accent:hover::before, #accent:focus-visible::before {
+    animation: accent-shear 440ms steps(1, end) 1;
+  }
+  .quick-link:hover::after, .kb-flow:hover::after, .tile a:hover::after {
+    animation: accent-shear 380ms steps(1, end) 1;
+  }
+}
+
 /* ---------- адаптив ---------- */
 @media (min-width: 900px) {
   /* Desktop: прибираємо зайві вертикальні проміжки між секціями. */

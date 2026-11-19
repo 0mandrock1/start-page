@@ -314,11 +314,21 @@
     document.documentElement.dataset.accent = name;
     $('accentName').textContent = name;
   }
-  $('accent').addEventListener('click', () => {
+  const accentButton = $('accent');
+  accentButton.addEventListener('click', () => {
     const cur = document.documentElement.dataset.accent;
     const next = ACCENTS[(ACCENTS.indexOf(cur) + 1) % ACCENTS.length];
     setAccent(next);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      accentButton.classList.remove('accent-switch');
+      void accentButton.offsetWidth; // повторний клік перезапускає короткий глітч
+      accentButton.classList.add('accent-switch');
+    }
     store.set('accent', next);
+    console.debug('[start-page] accent changed', { from: cur, to: next });
+  });
+  accentButton.addEventListener('animationend', (e) => {
+    if (e.animationName === 'accent-shear') accentButton.classList.remove('accent-switch');
   });
 
   // ---------- гарячі клавіші ----------

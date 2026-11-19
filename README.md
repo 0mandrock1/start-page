@@ -49,7 +49,7 @@ Google Translate, xHamster, Gmail, Proton Mail, tools.mandrock.me, articles.mand
 
 | Клавіша | Дія |
 |---|---|
-| `c` `g` `d` `s` `t` `h` | фокус у полі claude / chatgpt / duck.ai / пошук / переклад / tools |
+| `c` `g` `d` `s` `t` `q` | фокус у полі claude / chatgpt / duck.ai / пошук / переклад / tools |
 | `a` | фокус на першій задачі або полі нової задачі |
 | `n` | фокус у нотатці |
 | `1`–`9` | відкрити відповідний лінк |
