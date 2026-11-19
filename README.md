@@ -33,7 +33,7 @@
 
 ### Швидкий доступ
 
-Поруч із запитами на широкому екрані розташований компактний годинник. Під годинником є розділена кнопка **read / drafts**, **kb-flow**, **tools** і **articles**.
+Поруч із запитами на широкому екрані розташований компактний годинник. Під годинником є розділена кнопка **read / drafts**, **kb-flow**, **tools**, **articles**, **runs** і **password**.
 
 ### `// лінки`
 Google Translate, xHamster, Gmail, Proton Mail, tools.mandrock.me, articles.mandrock.me. Біля кожного — favicon сайту, а якщо його нема, то літера.

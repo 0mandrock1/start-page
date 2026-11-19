@@ -162,7 +162,7 @@ label[data-icon="ddgai"]::after { content: "AI"; position: absolute; right: 0.5r
 .read-split a { flex: 1; color: var(--foreground); }
 .read-split a + a { border-left: 1px dashed var(--page-accent); }
 .kb-flow { grid-column: 1 / -1; background: var(--page-accent); color: var(--primary-foreground); border-radius: var(--radius-control); }
-.quick-link { color: var(--foreground); box-shadow: 0 0 0 1px var(--border); border-radius: var(--radius-card); }
+.quick-link { padding-inline: 0.3rem; font-size: 0.8125rem; color: var(--foreground); box-shadow: 0 0 0 1px var(--border); border-radius: var(--radius-card); }
 @media (hover: hover) {
   .read-split a:hover, .kb-flow:hover, .quick-link:hover { box-shadow: var(--glow-interaction); }
 }
