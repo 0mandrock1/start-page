@@ -3,7 +3,7 @@
 # `mandrock0 // start`
 
 **Мінімалістична стартова сторінка для Microsoft Edge (і будь-якого Chromium).**
-Великий годинник, швидкі запити в AI-чати, пошук, лінки, задачі й нотатка — і нічого зайвого.
+Компактний годинник, швидкі запити в AI-чати, пошук, лінки, задачі й нотатка — і нічого зайвого.
 
 ![Edge](https://img.shields.io/badge/Edge-Manifest_V3-b8123f?style=flat-square)
 ![version](https://img.shields.io/github/v/release/0mandrock1/start-page?style=flat-square&color=b8123f)
@@ -30,6 +30,10 @@
 | **переклад → uk** | Google Translate з уже вставленим текстом (auto → українська) |
 
 `Ctrl`+`Enter` (або `Shift`+`Enter`) відкриває результат у новій вкладці.
+
+### Швидкий доступ
+
+Поруч із запитами на широкому екрані розташований компактний годинник. Під запитами є розділена кнопка **read / drafts** і кнопка **kb-flow**.
 
 ### `// лінки`
 Google Translate, xHamster, Gmail, Proton Mail, tools.mandrock.me, articles.mandrock.me. Біля кожного — favicon сайту, а якщо його нема, то літера.
